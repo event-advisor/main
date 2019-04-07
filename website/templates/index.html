@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <h1 class="display-4">Display results</h1>
+        <p class="lead">Eventbrite</p>
+        
+    </div>
+</div>
+<div id="write"></div>
+<form action="/predict" method="POST">
+    <div class="form-group">
+        <label for="value">search:</label>
+        <input type="text" class="form-control" id ="search" name="search" placeholder="enter to search" autocomplete="off">
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+{% endblock %}
