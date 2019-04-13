@@ -1,6 +1,6 @@
 from flask import Flask , flash, redirect, render_template, request, session, abort
 import pandas as pd
-import eventbriteData as eventbriteData
+import DataCollection.eventbriteData as eventbriteData
 
 app = Flask(__name__)
 eventData = eventbriteData.EventbriteData()

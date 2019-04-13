@@ -4,7 +4,7 @@ from requests import get
 class EventbriteData:
     
     def __init__(self):
-        f = open(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\website\token.txt","r")
+        f = open(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\website\DataCollection\token.txt","r")
         credentials = f.read()
         f.close()
         txt_arr = credentials.split("\n")
