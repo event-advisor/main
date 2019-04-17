@@ -2,14 +2,28 @@
 {% block body %}
 
 <center>
+    
     <div>
+        <hr>
         The search input is <b>{{  searchinput }}</b>.
         <br>
-        The event Name is <b>{{  eventName }}</b>.
+        {%for i in range(10)%} 
+        <p>{{ i }}</p>
+        The event Name is <b>{{  eventNames[i] }}</b>.
         <br>
-        The event Url is <a href = "{{ eventUrl }}">{{ eventUrl }}</a>
+        The event Location is <b>{{  eventLocations[i] }}</b>.
         <br>
-        The eventImage is <img src="{{ eventImageUrl }}">
+        Start : {{ eventTimes[i][0] }}
+        <br>
+        End : {{ eventTimes[i][1] }}
+        <br>
+        The event Url is <a href = "{{ eventUrls[i] }}">{{ eventUrls[i] }}</a>
+        <br>
+        The eventImage is <img src="{{ eventImageUrls[i] }}">
+        <br>
+        <p>{{ eventDescriptions[i] }}</p>
+        <hr>
+        {%endfor%} 
     </div>
         
     <div>
