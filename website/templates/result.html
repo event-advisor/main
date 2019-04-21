@@ -25,7 +25,9 @@
         <hr>
         {%endfor%} 
     </div>
-        
+    {%for i in range(1,10)%} 
+    <span><a href = {{ pageUrls[i-1] }} >{{ i }}</a></span>
+    {%endfor%}   
     <div>
         <a href="/" class="btn btn-primary">Test Another</a>
     </div>
