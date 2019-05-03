@@ -5,7 +5,8 @@ function loading(){
     $("#content").hide();
     $("#head-loader").show();
     $("#loader").show();
-    
+    var searchUrl = "/predict/?q=" + $("#search").val() + "&p=1"
+    window.location= searchUrl
 }
 </script>
 <div id="content">
@@ -36,7 +37,6 @@ function loading(){
     <input type="submit" value="submit" class="btn btn-primary" onclick="loading()">
     </div>
 </form>
-
 </div>
 <h3 id="head-loader" style="display:none" >Loading Please wait a moment ... </h3>
 <div id="loader" style="display:none" ></div>

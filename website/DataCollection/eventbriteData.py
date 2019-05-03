@@ -12,10 +12,10 @@ class EventbriteData:
         self._url = "https://www.eventbriteapi.com/v3/events/search"
         
         
-    def getData(self,searchtxt):
+    def getData(self,page,searchtxt):
         payload = {"q":searchtxt,
            "location.address":"singapore",
-            "page":"1",
+           "page":page,
            "expand":"venue",
            "token":self._token}
         response = get(self._url,params=payload).json()["events"]
