@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<center>
+    
+    <div>
+        <hr>
+        The search input is <b>{{  searchinput }}</b>.
+        <br>
+        {%for i in range(5)%} 
+        <p>{{ i }} : peatix</p>
+        The event Name is <b>{{  peatixNames[i] }}</b>.
+        <br>
+        The event Url is <a href = "{{ peatixUrls[i] }}">{{ peatixUrls[i] }}</a>
+        <br>
+        The event Location is <b>{{  eventLocations[i] }}</b>.
+        <br>
+        Start : {{ eventTimes[i][0] }}
+        <br>
+        End : {{ eventTimes[i][1] }}
+        <hr>
+        {%endfor%} 
+
+        {%for i in range(5)%} 
+        <p>{{ i }} : eventbrite</p>
+        The event Name is <b>{{  eventNames[i] }}</b>.
+        <br>
+        The event Url is <a href = "{{ eventUrls[i] }}">{{ eventUrls[i] }}</a>
+        <br>
+        The event Location is <b>{{  eventLocations[i] }}</b>.
+        <br>
+        Start : {{ eventTimes[i][0] }}
+        <br>
+        End : {{ eventTimes[i][1] }}
+        <hr>
+        {%endfor%} 
+
+
+        {%for i in range(5)%} 
+        <p>{{ i }} : meet up</p>
+        The event Name is <b>{{  meetupNames[i] }}</b>.
+        <br>
+        The event Url is <a href = "{{ meetupUrls[i] }}">{{ meetupUrls[i] }}</a>
+        <br>
+        The event Location is <b>{{  eventLocations[i] }}</b>.
+        <br>
+        Start : {{ eventTimes[i][0] }}
+        <br>
+        End : {{ eventTimes[i][1] }}
+        <hr>
+        {%endfor%} 
+    </div>
+        
+    <div>
+        <a href="/" class="btn btn-primary">Test Another</a>
+    </div>
+</center>
+
+{% endblock body %}

@@ -16,13 +16,27 @@ function loading(){
     </div>
 </div>
 
-<form action="/predict" method="POST">
+<!-- <form action="/predict" method="POST">
     <div class="form-group">
-        <label for="value">search:</label>
+        <label for="value">eventbrite search:</label>
         <input type="text" class="form-control" id ="search" name="search" placeholder="enter to search" autocomplete="off">
     <input type="submit" value="submit" class="btn btn-primary" onclick="loading()">
     </div>
+</form> -->
+
+<form action="/meetup" method="POST">
+    <div class="form-group">
+        <select name="category">
+            <option value="tech" selected>tech</option>
+            <option value="cook">cook</option>
+        </select>    
+        <label for="value">search:</label>
+        <input type="text" class="form-control" id ="search" name="search" placeholder="enter to search" autocomplete="off">
+
+    <input type="submit" value="submit" class="btn btn-primary" onclick="loading()">
+    </div>
 </form>
+
 </div>
 <h3 id="head-loader" style="display:none" >Loading Please wait a moment ... </h3>
 <div id="loader" style="display:none" ></div>
