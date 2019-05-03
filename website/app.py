@@ -17,7 +17,7 @@ def index():
 @app.route("/predict/", methods =['GET'])
 def predict():
     searchtxt = request.form['search']
-    items = eventData.getData(searchtxt)
+    items = eventData.getData("1",searchtxt)
     # user
     page = request.args.get("p",default = 1, type = str)
     searchtxt = request.args.get("q",default = 1, type = str)
@@ -32,6 +32,7 @@ def predict():
     # eventLocations = eventData.getEventlocation(items,searchtxt)
     # eventTimes = eventData.getEventTime(items,searchtxt)
 
+    #pagination
     pageUrls= [ pageUrl[:-1] + str(i) for i in range(1,10)]
 
     return render_template("result.html",
@@ -61,7 +62,7 @@ def meetup():
     peatixTimes = peatixData.getEventTime(peatixItems,searchtxt)
     print("peatix",time.time() - start)
     # eventbrite
-    eventItems = eventData.getData(searchtxt)
+    eventItems = eventData.getData("1",searchtxt)
     eventNames = eventData.getEventName(eventItems,searchtxt)
     eventUrls =  eventData.getEventUrl(eventItems,searchtxt)
     eventLocations = eventData.getEventlocation(eventItems,searchtxt)
@@ -96,7 +97,6 @@ def shutdown():
     peatixData._driver.close()
     print("shutdown")
     return render_template("index.html")
-    pageUrls = pageUrls)
 
 if __name__ == "__main__":
     app.run()

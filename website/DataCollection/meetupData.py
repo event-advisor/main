@@ -35,15 +35,15 @@ class MeetUpData:
         return urls
     def getEventlocation(self,items,searchtxt):
         eventLocations=[]
-        for i in range(10):
+        for i in range(5):
             eventLocation = items[i]['venue']['name']
             eventLocationAddress = items[i]['venue']['address_1']
-            eventAddress = eventLocation + " " +eventLocationAddress 
+            eventAddress = eventLocation + " " + eventLocationAddress 
             eventLocations.append(eventAddress)
         return eventLocations
     def getEventTime(self,items,searchtxt):
         eventTimes=[]
-        for i in range(10):
+        for i in range(len(items)):
             eventStart = items[i]["local_date"]+" " + items[i]["local_time"]
             eventEnd = str(int(items[i]["duration"])/(60*1000)) + "minutes"
             eventTime = [eventStart,eventEnd]
