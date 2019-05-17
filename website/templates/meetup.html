@@ -1,59 +1,141 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<center>
-    
-    <div>
-        <hr>
-        The search input is <b>{{  searchinput }}</b>.
-        <br>
-        {%for i in range(5)%} 
-        <p>{{ i }} : peatix</p>
-        The event Name is <b>{{  peatixNames[i] }}</b>.
-        <br>
-        The event Url is <a href = "{{ peatixUrls[i] }}">{{ peatixUrls[i] }}</a>
-        <br>
-        The event Location is <b>{{  peatixLocations[i] }}</b>.
-        <br>
-        Start : {{ peatixTimes[i][0] }}
-        <br>
-        End : {{ peatixTimes[i][1] }}
-        <hr>
-        {%endfor%} 
+<script>
+$(document).ready(function(){
+  $("#page-content").fadeIn("slow");
+});
+</script>
+<style>
+  a {
+    color:darkslategray;
+  }
+  a:hover{
+    color: black
+  }
+</style>
+  <!-- Page Content -->
+  <br>
+  <form action="/meetup/">
+    <div class="form-group row" >
+    <label for="value" class="col-sm-2 col-form-label" >Search:</label>  
+    <div class="col-4"> 
+    <input class="form-control" id ="search" name="search" type="text" placeholder="Search for Events" autocomplete="off" list="data-list">
+            <datalist id="data-list">
+                <option value="technology"></option>
+                <option value="cooking"></option>
+            </datalist>
+    </div> 
+     <input type="submit" value="submit" class="btn btn-primary">
+</div>
+</form>
+<br>
+  <div id="page-content" style="display: none" class="container">
 
-        {%for i in range(5)%} 
-        <p>{{ i }} : eventbrite</p>
-        The event Name is <b>{{  eventNames[i] }}</b>.
-        <br>
-        The event Url is <a href = "{{ eventUrls[i] }}">{{ eventUrls[i] }}</a>
-        <br>
-        The event Location is <b>{{  eventLocations[i] }}</b>.
-        <br>
-        Start : {{ eventTimes[i][0] }}
-        <br>
-        End : {{ eventTimes[i][1] }}
-        <hr>
-        {%endfor%} 
-
-
-        {%for i in range(5)%} 
-        <p>{{ i }} : meet up</p>
-        The event Name is <b>{{  meetupNames[i] }}</b>.
-        <br>
-        The event Url is <a href = "{{ meetupUrls[i] }}">{{ meetupUrls[i] }}</a>
-        <br>
-        The event Location is <b>{{  meetupLocations[i] }}</b>.
-        <br>
-        Start : {{ meetupTimes[i][0] }}
-        <br>
-        End : {{ meetupTimes[i][1] }}
-        <hr>
-        {%endfor%} 
-    </div>
+    <div class="row">
+      <div class="col-lg-3">
+        <h1 id="searchtxt" class="my-4">{{  searchinput }}</h1>
+        <div class="list-group">
+          <a href="#" class="list-group-item active">Category 1</a>
+          <a href="#" class="list-group-item">Category 2</a>
+          <a href="#" class="list-group-item">Category 3</a>
+        </div>
+      </div>
+      <!-- /.col-lg-3 -->
+      
+      <div class="col-lg-9">
+        {%for i in range(peatixNames | length)%} 
+        {{ i }}
+        <div class="card bg-light border-info mb-3 w-75">
+          <div class="card-header">
+            <a href = "{{ peatixUrls[i] }}">Peatix {{  peatixNames[i] }}</a>
+          </div>
+          <div class="card-body">
+            <p>{{  peatixLocations[i] }}.</p>
+            <hr>
+            <p>Start : {{ peatixTimes[i][0] }}</p>
+            <hr>
+            <p>End : {{ peatixTimes[i][1] }}</p>
+        </div>
         
-    <div>
-        <a href="/" class="btn btn-primary">Test Another</a>
-    </div>
-</center>
+        <!-- /.card -->
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      {%endfor%} 
 
+      {%for i in range( eventNames |length )%} 
+        {{ i }}
+        <div class="card bg-light border-info mb-3">
+          <div class="card-header">
+           Eventbrite {{  eventNames[i] }}
+          </div>
+          <div class="card-body">
+            <p><a href = "{{ eventUrls[i] }}">{{ eventUrls[i] }}</a></p>
+            <hr>
+            <p>{{  eventLocations[i] }}.</p>
+            <hr>
+            <p>Start : {{ eventTimes[i][0] }}</p>
+            <hr>
+            <p>End : {{ eventTimes[i][1] }}</p>
+        </div>
+        
+        <!-- /.card -->
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      {%endfor%} 
+
+      {%for i in range(meetupNames|length)%} 
+      {{ i }}
+        <div class="card bg-light border-info mb-3">
+          <div class="card-header">
+           meetup {{  meetupNames[i] }}
+          </div>
+          <div class="card-body">
+            <p><a href = "{{ meetupUrls[i] }}">{{ meetupUrls[i] }}</a></p>
+            <hr>
+            <p>{{  meetupLocations[i] }}.</p>
+            <hr>
+            <p>Start : {{ meetupTimes[i][0] }}</p>
+            <hr>
+            <p>End : {{ meetupTimes[i][1] }}</p>
+        </div>
+        
+        <!-- /.card -->
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      {%endfor%}
+    </div>
+
+  </div>
+  <!-- /.container -->
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item"><a id="1" class="page-link" href="#" >First</a></li>
+      <li class="page-item"><a id="2" class="page-link" href="#">2</a></li>
+      <li class="page-item"><a id="3" class="page-link" href="#">3</a></li>
+      <li class="page-item"><a id="4" class="page-link" href="#">4</a></li>
+      <li class="page-item"><a id="5" class="page-link" href="#">5</a></li>
+      <li class="page-item"><a id="6" class="page-link" href="#">6</a></li>
+      <li class="page-item"><a id="7" class="page-link" href="#">7</a></li>
+      <li class="page-item"><a id="8" class="page-link" href="#" >8</a></li>
+      <li class="page-item"><a id="9" class="page-link" href="#" >9</a></li>
+      <li class="page-item"><a id="more" class="page-link" href="#">More</a></li>
+    </ul>
+  </nav>
+  <script>
+  var theSearchTxt = document.getElementById("searchtxt").innerHTML;
+  for (var i =1 ; i < 10 ; i++){
+    document.getElementById(i.toString()).href = "/meetup/?search="+theSearchTxt+"&p="+i.toString();
+  }
+  </script>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
 {% endblock body %}

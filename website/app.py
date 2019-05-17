@@ -9,19 +9,20 @@ app = Flask(__name__)
 eventData = eventbriteData.EventbriteData()
 meetupData = meetupData.MeetUpData()
 peatixData = peatixDataInit.peatixData()
+peatixCounter = 1
+eventCounter = 1
 
 @app.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/predict/", methods =['GET'])
+@app.route("/predict/", methods =['POST'])
 def predict():
     searchtxt = request.form['search']
     items = eventData.getData("1",searchtxt)
     # user
-    page = request.args.get("p",default = 1, type = str)
+    page = "1"
     searchtxt = request.args.get("q",default = 1, type = str)
-    pageUrl = request.url
 
     #backend
     items = eventData.getData(page,searchtxt)
@@ -33,7 +34,7 @@ def predict():
     # eventTimes = eventData.getEventTime(items,searchtxt)
 
     #pagination
-    pageUrls= [ pageUrl[:-1] + str(i) for i in range(1,10)]
+    pageUrls= "[ pageUrl[:-1] + str(i) for i in range(1,10)]"
 
     return render_template("result.html",
     searchinput = searchtxt,
@@ -44,37 +45,48 @@ def predict():
     # eventLocations = eventLocations,
     # eventTimes = eventTimes)
 
-@app.route("/meetup", methods =['POST'])
+@app.route("/meetup/", methods =['GET'])
 def meetup():
+    global eventCounter
+    global peatixCounter
     start = time.time()
-    searchtxt = request.form['search']
-    if (searchtxt == ""):
-        category_arr ={"tech":"Technology","cook":"cooking"}
-        searchtxt = request.form['category']
-        searchtxt = category_arr[searchtxt]
-    
-    print(time.time() - start)
+
+    page = request.args.get("p",default = 1, type = str)
+    searchtxt = request.args.get("search",default = 1, type = str)
+    pages = int(page)
+    print(page)
+
+    print("--------------------------------")
     # peatix
-    peatixItems = peatixData.getData(searchtxt)
-    peatixNames = peatixData.getEventName(peatixItems,searchtxt)
-    peatixUrls =  peatixData.getEventUrl(peatixItems,searchtxt)
-    peatixLocations = peatixData.getEventlocation(peatixItems,searchtxt)
-    peatixTimes = peatixData.getEventTime(peatixItems,searchtxt)
+    peatixItems = peatixData.getData(peatixCounter,searchtxt)
+    peatixNames = peatixData.getEventName(peatixItems,searchtxt)[5*pages-5:5*pages]
+    peatixUrls =  peatixData.getEventUrl(peatixItems,searchtxt)[5*pages-5:5*pages]
+    peatixLocations = peatixData.getEventlocation(peatixItems,searchtxt)[5*pages-5:5*pages]
+    peatixTimes = peatixData.getEventTime(peatixItems,searchtxt)[5*pages-5:5*pages]
+    print(len(peatixItems))
     print("peatix",time.time() - start)
     # eventbrite
-    eventItems = eventData.getData("1",searchtxt)
-    eventNames = eventData.getEventName(eventItems,searchtxt)
-    eventUrls =  eventData.getEventUrl(eventItems,searchtxt)
-    eventLocations = eventData.getEventlocation(eventItems,searchtxt)
-    eventTimes = eventData.getEventTime(eventItems,searchtxt)
+    eventItems = eventData.getData(eventCounter,searchtxt)
+    eventNames = eventData.getEventName(eventItems,searchtxt)[5*pages-5:5*pages]
+    if (eventNames == []):
+        # if end of page
+        eventCounter +=1
+        eventItems = eventData.getData(eventCounter,searchtxt)
+        eventNames = eventData.getEventName(eventItems,searchtxt)[5*pages-5:5*pages]
+    eventUrls =  eventData.getEventUrl(eventItems,searchtxt)[5*pages-5:5*pages]
+    eventLocations = eventData.getEventlocation(eventItems,searchtxt)[5*pages-5:5*pages]
+    eventTimes = eventData.getEventTime(eventItems,searchtxt)[5*pages-5:5*pages]
     print("eventbrite",time.time() - start)
     # meetup 
     meetupItems = meetupData.getData(searchtxt)
-    meetupNames = meetupData.getEventName(meetupItems,searchtxt)
-    meetupUrls =  meetupData.getEventUrl(meetupItems,searchtxt)
-    meetupLocations = meetupData.getEventlocation(meetupItems,searchtxt)
-    meetupTimes = meetupData.getEventTime(meetupItems,searchtxt)
+    meetupNames = meetupData.getEventName(meetupItems,searchtxt)[:5*pages]
+    meetupUrls =  meetupData.getEventUrl(meetupItems,searchtxt)[:5*pages]
+    meetupLocations = meetupData.getEventlocation(meetupItems,searchtxt)[:5*pages]
+    meetupTimes = meetupData.getEventTime(meetupItems,searchtxt)[:5*pages]
     print("meetup",time.time() - start)
+
+    if (meetupItems == [] and eventItems == [] and peatixItems == []):
+        return render_template("index.html")
 
     return render_template("meetup.html",
     searchinput = searchtxt,
@@ -89,8 +101,7 @@ def meetup():
     meetupNames = meetupNames,
     meetupUrls= meetupUrls,
     meetupLocations = meetupLocations,
-    meetupTimes = meetupTimes
-    )
+    meetupTimes = meetupTimes)
 
 @app.route("/shutdown")
 def shutdown():

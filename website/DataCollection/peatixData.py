@@ -12,13 +12,13 @@ class peatixData:
         options.add_experimental_option("prefs",prefs)
         self._driver = webdriver.Chrome(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\website\DataCollection\chromedriver.exe",options = options)
         
-    def getDataUrl(self,searchtxt):
+    def getDataUrl(self,page,searchtxt):
         mode =""
         payload = { "q":searchtxt,
                 "country":"SG",
                 "l.ll":"1.3553794,103.86774439999999",
                 "l.text":"Singapore",
-                "p":"1",
+                "p":page,
                 "size":"10",
                 "v":"3.4",
                 "dr":mode
@@ -26,8 +26,8 @@ class peatixData:
         theUrl = get(self._url,params=payload).url
         return theUrl
 
-    def getData(self,searchtxt):
-        theUrl = self.getDataUrl(searchtxt)
+    def getData(self,page,searchtxt):
+        theUrl = self.getDataUrl(page,searchtxt)
         self._driver.get(theUrl)
         html_soup = BeautifulSoup(self._driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
