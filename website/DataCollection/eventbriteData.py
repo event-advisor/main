@@ -23,47 +23,49 @@ class EventbriteData:
         
     def getEventName(self,items,searchtxt):
         names = []
-        for i in range(10):
+        for i in range(len(items)):
             name = items[i]["name"]["text"]
             names.append(name)
         return names
     def getEventUrl(self,items,searchtxt):
         urls = []
-        for i in range(10):
+        for i in range(len(items)):
             url = items[i]["url"]
             urls.append(url)
         return urls
-    def getEventImageUrl(self,items,searchtxt):
-        imageUrls=[]
-        for i in range(10):
-            logo = items[i]['logo']
-            if (logo is None):
-                imageUrls.append(items[0]['logo']['url'])
-            else:
-                imageUrl = logo['url']
-                imageUrls.append(imageUrl)
-        return imageUrls
+    # def getEventImageUrl(self,items,searchtxt):
+    #     imageUrls=[]
+    #     for i in range(len(items)):
+    #         logo = items[i]['logo']
+    #         if (logo is None):
+    #             imageUrls.append(items[0]['logo']['url'])
+    #         else:
+    #             imageUrl = logo['url']
+    #             imageUrls.append(imageUrl)
+    #     return imageUrls
 
-    def getEventDescription(self,items,searchtxt):
-        eventDescriptions=[]
-        for i in range(10):
-            eventDescription = items[i]['summary']
-            eventDescriptions.append(eventDescription)
-        return eventDescriptions  
+    # def getEventDescription(self,items,searchtxt):
+    #     eventDescriptions=[]
+    #     for i in range(10):
+    #         eventDescription = items[i]['summary']
+    #         eventDescriptions.append(eventDescription)
+    #     return eventDescriptions  
 
     def getEventlocation(self,items,searchtxt):
         eventLocations=[]
-        for i in range(10):
+        for i in range(len(items)):
             eventLocation = items[i]['venue']['address']
             eventAddress = eventLocation['localized_address_display']
             eventLocations.append(eventAddress)
-        return eventLocations
+        f = lambda  x: "None" if x == None else x
+        return list(map(f,eventLocations))
 
     def getEventTime(self,items,searchtxt):
         eventTimes=[]
-        for i in range(10):
+        for i in range(len(items)):
             eventStart = "timezone : {} \n".format(items[i]['start']['timezone']) + items[i]['start']['local']
             eventEnd = "timezone : {} \n".format(items[i]['end']['timezone']) + items[i]['end']['local']    
             eventTime = [eventStart,eventEnd]
             eventTimes.append(eventTime)
-        return eventTimes
+        f = lambda  x: "None" if x == None else x
+        return list(map(f,eventTimes))

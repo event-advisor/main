@@ -5,25 +5,31 @@ function loading(){
     $("#content").hide();
     $("#head-loader").show();
     $("#loader").show();
-    var searchUrl = "/predict/?q=" + $("#search").val() + "&p=1"
-    window.location= searchUrl
 }
 </script>
 <div id="content">
-<div class="jumbotron jumbotron-fluid">
-    <div class="container">
-        <h1 class="display-4">Display results</h1>
-        <p class="lead">Eventbrite</p>  
-    </div>
-</div>
+<br>
+<img style="height:300px; width:90%; float:center" src="https://28qs4b33l1o7458ep2hwzyw1-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/OgleBay_Weisler-1166-1550x700.jpg"> 
+<br>
+<br>
 
-    <div class="form-group">
-        <label for="value">search:</label>
-        <input type="text" class="form-control" id ="search" name="search" placeholder="enter to search" autocomplete="off">
-    <input type="submit" value="submit" class="btn btn-primary" onclick="loading()">
-    </div>
+<form action="/meetup/">
+    <div class="form-group row" >
+    <label for="value" class="col-sm-2 col-form-label" >Search:</label>  
+    <div class="col-4"> 
+    <input class="form-control" id ="search" name="search" type="text" placeholder="Search for Events" autocomplete="off" list="data-list">
+            <datalist id="data-list">
+                <option value="technology"></option>
+                <option value="cooking"></option>
+            </datalist>
+    </div> 
+     <input type="submit" value="submit" class="btn btn-primary" onclick="return loading()">
+</div>
+</form>
 </div>
 <h3 id="head-loader" style="display:none" >Loading Please wait a moment ... </h3>
 <div id="loader" style="display:none" ></div>
 <!--css loader from https://www.w3schools.com/howto/howto_css_loader.asp-->
+<!-- css template from https://github.com/BlackrockDigital/startbootstrap-shop-item -->
 {% endblock %}
+
