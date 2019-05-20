@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<center>
+    {% for event in listing %}
+    <section class="event">
+        <main class="lister-item-content">
+            Name: <b>{{event[0]}}</b>
+            <br>
+            Date: <b>{{event[1]}}</b>
+            <br>
+            Start Time: <b>{{event[2]}}</b>
+            <br>
+            Venue: <b>{{event[3]}}</b> 
+            <br>
+            URL: <a href = "{{event[4]}}" target="_blank">{{event[4]}}</a>
+        </main>
+        <br>
+        <br>
+    </section>
+    {% endfor %}
+</center>
+{% endblock body %}
