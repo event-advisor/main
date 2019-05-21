@@ -4,7 +4,12 @@ import json
 
 class Eventbrite:
     def __init__(self):
-        self._token = "TOXBFSVPO5M67FQEFDOO"
+        f = open(r"/Users/student/Desktop/Project Event Advisor/Token.rtf", "r")
+        credentials = f.read()
+        f.close()
+        txt_arr = credentials.split("\n")
+        self._token = txt_arr[0]
+        #self._token = "TOXBFSVPO5M67FQEFDOO"
 
     def categories_list(self):
         params = {"token": self._token}

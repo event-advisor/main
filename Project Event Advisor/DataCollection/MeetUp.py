@@ -4,7 +4,12 @@ import json
 
 class MeetUp:
   def __init__(self):
-    self._token = "efc73c9cf05e124153013e67a7e4b3f1"
+    f = open(r"/Users/student/Desktop/Project Event Advisor/Token.rtf", "r")
+    credentials = f.read()
+    f.close()
+    txt_arr = credentials.split("\n")
+    self._token = txt_arr[1]
+    #self._token = "efc73c9cf05e124153013e67a7e4b3f1"
 
   def categories_list(self):
     params = {"token": self._token}
