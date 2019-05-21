@@ -39,12 +39,13 @@ class MeetUp:
       date_time = date + " " +event["local_time"]
       start_time = datetime.strptime(date_time, "%Y-%m-%d %H:%M") # Start Time
       
-      start_time = start_time.strftime("%H:%M")
+      start_time = start_time.strftime("%H:%M")+":00"
 
-      try:
-          venue = event["venue"]["name"]
-      except KeyError:
-          venue = "-"
+      venue = event.get("venue", {}).get("name", "-")
+      #try:
+      #    venue = event["venue"]["name"]
+      #except KeyError:
+      #    venue = "-"
               
       url = event["link"]
       
