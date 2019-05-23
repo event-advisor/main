@@ -1,15 +1,11 @@
 # file to collect data from eventbrite
 from requests import get
-from datetime import datetime
+import os
 
 class EventbriteData:
     
     def __init__(self):
-        f = open(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\DataCollection\token.txt","r")
-        credentials = f.read()
-        f.close()
-        txt_arr = credentials.split("\n")
-        self._token = txt_arr[0]
+        self._token = os.environ.get('event-token')
         self._url = "https://www.eventbriteapi.com/v3/events/search"
         self.category_dict = {"Arts": "Performing & Visual Arts", 
                      "Business": "Business & Professional",

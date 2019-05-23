@@ -1,13 +1,9 @@
 from requests import get
-
+import os
 class MeetUpData:
     
     def __init__(self):
-        f = open(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\DataCollection\token.txt","r")
-        credentials = f.read()
-        f.close()
-        txt_arr = credentials.split("\n")
-        self._token = txt_arr[1]
+        self._token = os.environ.get('event-token')
         self._url = "https://api.meetup.com/find/upcoming_events/"
         self.category_dict = {"Arts": "Arts", 
                      "Business":  "Career & Business",
