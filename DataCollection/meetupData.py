@@ -29,7 +29,7 @@ class MeetUpData:
         payload = { "text":searchtxt,
                    "access_token" : self._token,
                    "page": "50"}
-        response = get(self._url,params=payload).json()["events"]
+        response = get(self._url,params=payload).json().get("events")
         return response
     def getEventName(self,items,searchtxt):
         names =[]
