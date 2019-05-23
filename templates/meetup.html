@@ -1,0 +1,152 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script>
+$(document).ready(function(){
+  $("#page-content").fadeIn("slow");
+});
+</script>
+<style>
+  a {
+    color:darkslategray;
+  }
+  a:hover{
+    color: black
+  }
+  p{
+    margin-top: -0.5rem;
+    margin-bottom: -0.7rem;
+  }
+</style>
+  <!-- Page Content -->
+  <div class="row justify-content-center" style="padding: 1%;"><img style="height:200px; width:60%; float:center" src="{{ url_for('static', filename='event.jpg') }}"> </div>
+  <div id="page-content" style="display: none" class="container">
+      <div class="row justify-content-center">
+          {%for i in range(peatixNames | length)%}
+          <!-- 0.7 for the 2nd google if else in jinjia2 -->
+          {% if i%2 == 0 %}
+        <div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+        <div class="card mb-3 h-80 w-75" style="padding:2%;">
+            <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">Peatix {{  peatixNames[i] }}</b></a>
+            <div class="card-body flex-fill" style="padding:0%">
+            <p><b style="font-family: Monospace; font-size:10px;">{{ peatixTimes[i][0] }}</b></p>
+            <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  peatixLocations[i] }}.</b></span>
+            <!-- fix below -->
+            <a href = "{{ peatixUrls[i] }}">Read More</a>
+          </div>
+      </div>
+      {% else %}
+        <!-- /.card -->
+        <div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+          <div class="card mb-3 h-80 w-75" style="padding:2%;">
+              <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">Peatix {{  peatixNames[i] }}</b></a>
+              <div class="card-body flex-fill" style="padding:0%">
+              <p><b style="font-family: Monospace; font-size:10px;">{{ peatixTimes[i][0] }}</b></p>
+              <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  peatixLocations[i] }}.</b></span>
+              <!-- fix below -->
+              <a href = "{{ peatixUrls[i] }}">Read More</a>
+            </div>
+        </div>
+      {% endif %}
+        
+      </div>
+      <!-- /.col-lg-9 -->
+      {%endfor%} 
+
+      <br>
+      {%for i in range(eventNames | length)%}
+      <!-- 0.7 for the 2nd google if else in jinjia2 -->
+      {% if i%2 == 1 %}
+    <div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+    <div class="card mb-3 h-80 w-75" style="padding:2%;">
+        <a href = "{{ eventUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">event {{  eventNames[i] }}</b></a>
+        <div class="card-body flex-fill" style="padding:0%">
+        <p><b style="font-family: Monospace; font-size:10px;">{{ eventTimes[i][0] }}</b></p>
+        <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  eventLocations[i] }}.</b></span>
+        <!-- fix below -->
+        <a href = "{{ eventUrls[i] }}">Read More</a>
+      </div>
+  </div>
+  {% else %}
+    <!-- /.card -->
+    <div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+      <div class="card mb-3 h-80 w-75" style="padding:2%;">
+          <a href = "{{ eventUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">eventbrite {{  eventNames[i] }}</b></a>
+          <div class="card-body flex-fill" style="padding:0%">
+          <p><b style="font-family: Monospace; font-size:10px;">{{ eventTimes[i][0] }}</b></p>
+          <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  eventLocations[i] }}.</b></span>
+          <!-- fix below -->
+          <a href = "{{ eventUrls[i] }}">Read More</a>
+        </div>
+    </div>
+  {% endif %}
+  </div>
+  <!-- /.col-lg-9 -->
+  {%endfor%} 
+
+  <br>
+  {%for i in range(meetupNames | length)%}
+  <!-- 0.7 for the 2nd google if else in jinjia2 -->
+  {% if i%2 == 0 %}
+<div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+<div class="card mb-3 h-80 w-75" style="padding:2%;">
+    <a href = "{{ meetupUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">meetup {{  meetupNames[i] }}</b></a>
+    <div class="card-body flex-fill" style="padding:0%">
+    <p><b style="font-family: Monospace; font-size:10px;">{{ meetupTimes[i][0] }}</b></p>
+    <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  meetupLocations[i] }}.</b></span>
+    <!-- fix below -->
+    <a href = "{{ meetupUrls[i] }}">Read More</a>
+  </div>
+</div>
+{% else %}
+<!-- /.card -->
+<div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
+  <div class="card mb-3 h-80 w-75" style="padding:2%;">
+      <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">meetup {{  meetupNames[i] }}</b></a>
+      <div class="card-body flex-fill" style="padding:0%">
+      <p><b style="font-family: Monospace; font-size:10px;">{{ meetupTimes[i][0] }}</b></p>
+      <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  meetupLocations[i] }}.</b></span>
+      <!-- fix below -->
+      <a href = "{{ meetupUrls[i] }}">Read More</a>
+    </div>
+</div>
+{% endif %}
+
+</div>
+<!-- /.col-lg-9 -->
+{%endfor%} 
+    </div>
+
+  </div>
+  <!-- /.container -->
+
+  <div class="row justify-content-center">
+  <nav aria-label="Page navigation example" >
+    <ul class="pagination">
+      <li class="page-item"><a id="1" class="page-link" href="#" >First</a></li>
+      <li class="page-item"><a id="2" class="page-link" href="#">2</a></li>
+      <li class="page-item"><a id="3" class="page-link" href="#">3</a></li>
+      <li class="page-item"><a id="4" class="page-link" href="#">4</a></li>
+      <li class="page-item"><a id="5" class="page-link" href="#">5</a></li>
+      <li class="page-item"><a id="6" class="page-link" href="#">6</a></li>
+      <li class="page-item"><a id="7" class="page-link" href="#">7</a></li>
+      <li class="page-item"><a id="8" class="page-link" href="#" >8</a></li>
+      <li class="page-item"><a id="9" class="page-link" href="#" >9</a></li>
+      <li class="page-item"><a id="more" class="page-link" href="#">More</a></li>
+    </ul>
+  </nav>
+</div>
+  <script>
+  var theSearchTxt = document.getElementById("searchtxt").innerHTML;
+  for (var i =1 ; i < 10 ; i++){
+    document.getElementById(i.toString()).href = "/meetup/?search="+theSearchTxt+"&p="+i.toString();
+  }
+  </script>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+{% endblock body %}
