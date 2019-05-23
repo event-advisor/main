@@ -5,12 +5,13 @@ from bs4 import BeautifulSoup
 class peatixData:
     
     def __init__(self):
+        self.CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         self._url = "https://peatix.com/search"
         options = webdriver.ChromeOptions()
         options.add_argument('--headless')
         prefs = {"profile.managed_default_content_settings.images":2}
         options.add_experimental_option("prefs",prefs)
-        self._driver = webdriver.Chrome(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\DataCollection\chromedriver.exe",options = options)
+        self._driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
         
     def getDataUrl(self,page,searchtxt):
         mode =""
