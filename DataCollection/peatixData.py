@@ -8,6 +8,7 @@ class peatixData:
         self.CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         self._url = "https://peatix.com/search"
         options = webdriver.ChromeOptions()
+        options.binary_location = '.apt/usr/bin/google-chrome-stable'
         options.add_argument('--headless')
         prefs = {"profile.managed_default_content_settings.images":2}
         options.add_experimental_option("prefs",prefs)
