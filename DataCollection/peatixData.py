@@ -1,17 +1,14 @@
 from requests import get
 from selenium import webdriver 
 from bs4 import BeautifulSoup
-
+import time
 class peatixData:
     
     def __init__(self):
         self.CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         self._url = "https://peatix.com/search"
-        options = webdriver.ChromeOptions()
-        options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        options.add_argument('--disable-gpu')
-        options.add_argument('--no-sandbox')
-        self._driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
+
+        
         
     def getDataUrl(self,page,searchtxt):
         mode =""
@@ -25,12 +22,17 @@ class peatixData:
                 "dr":mode
         }
         theUrl = get(self._url,params=payload).url
+        
         return theUrl
 
     def getData(self,page,searchtxt):
+        options = webdriver.ChromeOptions()
+        options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
         theUrl = self.getDataUrl(page,searchtxt)
-        self._driver.get(theUrl)
-        html_soup = BeautifulSoup(self._driver.page_source,'html.parser')
+        driver.get(theUrl)
+        time.sleep(3)
+        html_soup = BeautifulSoup(driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
         return event_containers
 
