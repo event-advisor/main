@@ -6,7 +6,6 @@ class EventbriteData:
     
     def __init__(self):
         self._token = os.environ.get('event-token')
-        print(self._token,": event-------------------------")
         self._url = "https://www.eventbriteapi.com/v3/events/search"
         self.category_dict = {"Arts": "Performing & Visual Arts", 
                      "Business": "Business & Professional",

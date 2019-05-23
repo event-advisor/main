@@ -3,8 +3,7 @@ import os
 class MeetUpData:
     
     def __init__(self):
-        self._token = os.environ.get('event-token')
-        print(self._token,": meetup-------------------------")
+        self._token = os.environ.get('meetup-token')
         self._url = "https://api.meetup.com/find/upcoming_events/"
         self.category_dict = {"Arts": "Arts", 
                      "Business":  "Career & Business",
