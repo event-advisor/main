@@ -35,12 +35,12 @@ class peatixData:
     def getData(self,page,searchtxt):
         theUrl = self.getDataUrl(page,searchtxt)
         timeout = 20
+        self._driver.get(theUrl)
         try:
             WebDriverWait(self._driver, timeout).until(EC.presence_of_element_located((By.CLASS_NAME, "event-thumb ng-scope")))
         except TimeoutException:
             print("Timed out waiting for page to load")
             self._driver.quit()
-        self._driver.get(theUrl)
         html_soup = BeautifulSoup(self._driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
         return event_containers
