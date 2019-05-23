@@ -9,23 +9,35 @@ function loading(){
 </script>
 <div id="content">
 <br>
-<img style="height:300px; width:90%; float:center" src="https://28qs4b33l1o7458ep2hwzyw1-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/OgleBay_Weisler-1166-1550x700.jpg"> 
-<br>
-<br>
-
+<div class="row justify-content-center" style="padding: 15px;"><img style="height:300px; width:60%; float:center" src="https://28qs4b33l1o7458ep2hwzyw1-wpengine.netdna-ssl.com/wp-content/uploads/2018/04/OgleBay_Weisler-1166-1550x700.jpg"> </div>
+<div class="row justify-content-center text-left" style="font-family: Monospace; font-size:18px; padding: 15px; padding-right: 350px;"><b>What Are You Interested In Today?</b></div>
 <form action="/meetup/">
-    <div class="form-group row" >
-    <label for="value" class="col-sm-2 col-form-label" >Search:</label>  
+    <div class="form-group row justify-content-center align-items-center" >
     <div class="col-4"> 
-    <input class="form-control" id ="search" name="search" type="text" placeholder="Search for Events" autocomplete="off" list="data-list">
-            <datalist id="data-list">
-                <option value="technology"></option>
-                <option value="cooking"></option>
+    <input class="form-control" id ="search" name="search" type="text" placeholder="Search for Events" autocomplete="off" list="data-list" required>
+            <datalist id="data-list">           
+                <option value="Arts"></option>
+                <option value="Business"></option>
+                <option value= "Charity"></option>
+                <option value="Education"></option>
+                <option value="Family"></option>
+                <option value= "Fashion"></option>
+                <option value="Film"></option>
+                <option value="Food"></option>
+                <option value="Health"></option>
+                <option value="Hobbies"></option>
+                <option value="Music"></option>
+                <option value="Outdoors"></option>
+                <option value="Religion"></option>
+                <option value="Tech"> Technology</option>
+                <option value="Sports"></option>
             </datalist>
     </div> 
-     <input type="submit" value="submit" class="btn btn-primary" onclick="return loading()">
+     <input type="submit" value="Search" class="btn btn-primary" onclick="return loading()">
 </div>
 </form>
+
+<div class="row justify-content-center align-items-center">Top searches : <a href = "/">technology</a></div>
 </div>
 <h3 id="head-loader" style="display:none" >Loading Please wait a moment ... </h3>
 <div id="loader" style="display:none" ></div>
