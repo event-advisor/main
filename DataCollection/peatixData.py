@@ -8,7 +8,6 @@ class peatixData:
         self.CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         self._url = "https://peatix.com/search"
         options = webdriver.ChromeOptions()
-        ##
         options.binary_location = '.apt/usr/bin/google-chrome-stable'
         options.add_argument('--headless')
         prefs = {"profile.managed_default_content_settings.images":2}
@@ -31,6 +30,7 @@ class peatixData:
 
     def getData(self,page,searchtxt):
         theUrl = self.getDataUrl(page,searchtxt)
+        print(theUrl,"-------------------")
         self._driver.get(theUrl)
         html_soup = BeautifulSoup(self._driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
