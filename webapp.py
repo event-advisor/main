@@ -7,7 +7,6 @@ import time
 myapp = Flask(__name__)
 eventData = eventbriteData.EventbriteData()
 meetupData = meetupData.MeetUpData()
-peatixData = peatixDataInit.peatixData()
 eventItems = []
 peatixItems = []
 meetupItems = []
@@ -43,6 +42,7 @@ def meetup():
         print("new search term")
     print("--------------------------------")
     # peatix
+    peatixData = peatixDataInit.peatixData()
     print(len(meetupItems))
     while (len(peatixItems) < 50):
         items = peatixData.getData(peatixCounter,searchtxt)
