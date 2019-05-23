@@ -31,7 +31,6 @@ class peatixData:
         driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
         theUrl = self.getDataUrl(page,searchtxt)
         driver.get(theUrl)
-        time.sleep(3)
         html_soup = BeautifulSoup(driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
         return event_containers
