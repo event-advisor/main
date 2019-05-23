@@ -39,26 +39,25 @@ class peatixData:
             event_details = items[i].find("div",class_="event-thumb_detail")
             name =  event_details.h3.text
             names.append(name)
-        return names
+        return list(map(str,names))
     def getEventUrl(self,items,searchtxt):
         urls = []
         for i in range(len(items)):
             url = items[i].a["href"]
             urls.append(url)
-        return urls
+        return list(map(str,urls))
 
     def getEventlocation(self,items,searchtxt):
         eventLocations=[]
         for i in range(len(items)):
             eventAddress = items[i].find("span",class_ ="event-thumb_location ng-binding").text
             eventLocations.append(eventAddress)
-        return eventLocations
+        f = lambda  x: "None" if x == None else x
+        return list(map(f,eventLocations))
 
     def getEventTime(self,items,searchtxt):
         eventTimes=[]
         for i in range(len(items)):
-            eventStart = items[i].time["datetime"]
-            eventEnd = items[i].time["datetime"] 
-            eventTime = [eventStart,eventEnd]
+            eventTime = items[i].time["datetime"]
             eventTimes.append(eventTime)
-        return eventTimes
+        return list(map(str,eventTimes))

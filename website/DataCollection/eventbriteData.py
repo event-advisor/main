@@ -1,5 +1,6 @@
 # file to collect data from eventbrite
 from requests import get
+from datetime import datetime
 
 class EventbriteData:
     
@@ -10,9 +11,28 @@ class EventbriteData:
         txt_arr = credentials.split("\n")
         self._token = txt_arr[0]
         self._url = "https://www.eventbriteapi.com/v3/events/search"
+        self.category_dict = {"Arts": "Performing & Visual Arts", 
+                     "Business": "Business & Professional",
+                     "Charity": "Charity & Causes",
+                     "Culture": "Community & Culture",
+                     "Education": "Family & Education",
+                     "Family": "Family & Education",             
+                     "Fashion": "Fashion & Beauty",
+                     "Film": "Film, Media & Entertainment",
+                     "Food": "Food & Drink",
+                     "Health": "Health & Wellness",
+                     "Hobbies": "Hobbies & Special Interest",
+                     "Music": "Music",
+                     "Outdoors": "Travel & Outdoor",
+                     "Religion": "Religion & Spirituality",
+                     "Tech": "Science & Technology",
+                     "Sports": "Sports & Fitness"}
         
         
     def getData(self,page,searchtxt):
+        eventsearchtxt = self.category_dict.get(searchtxt)
+        if (eventsearchtxt is not None):
+            searchtxt = eventsearchtxt
         payload = {"q":searchtxt,
            "location.address":"singapore",
            "page":page,
@@ -21,51 +41,30 @@ class EventbriteData:
         response = get(self._url,params=payload).json()["events"]
         return response
         
-    def getEventName(self,items,searchtxt):
+    def getEventName(self,items):
         names = []
         for i in range(len(items)):
-            name = items[i]["name"]["text"]
+            name = items[i].get("name").get("text")
             names.append(name)
         return names
-    def getEventUrl(self,items,searchtxt):
+    def getEventUrl(self,items):
         urls = []
         for i in range(len(items)):
-            url = items[i]["url"]
+            url = items[i].get("url")
             urls.append(url)
         return urls
-    # def getEventImageUrl(self,items,searchtxt):
-    #     imageUrls=[]
-    #     for i in range(len(items)):
-    #         logo = items[i]['logo']
-    #         if (logo is None):
-    #             imageUrls.append(items[0]['logo']['url'])
-    #         else:
-    #             imageUrl = logo['url']
-    #             imageUrls.append(imageUrl)
-    #     return imageUrls
 
-    # def getEventDescription(self,items,searchtxt):
-    #     eventDescriptions=[]
-    #     for i in range(10):
-    #         eventDescription = items[i]['summary']
-    #         eventDescriptions.append(eventDescription)
-    #     return eventDescriptions  
-
-    def getEventlocation(self,items,searchtxt):
+    def getEventlocation(self,items):
         eventLocations=[]
         for i in range(len(items)):
-            eventLocation = items[i]['venue']['address']
-            eventAddress = eventLocation['localized_address_display']
+            eventLocation = items[i].get('venue').get('address')
+            eventAddress = eventLocation.get('localized_address_display')
             eventLocations.append(eventAddress)
-        f = lambda  x: "None" if x == None else x
-        return list(map(f,eventLocations))
+        return eventLocations
 
-    def getEventTime(self,items,searchtxt):
+    def getEventTime(self,items):
         eventTimes=[]
         for i in range(len(items)):
-            eventStart = "timezone : {} \n".format(items[i]['start']['timezone']) + items[i]['start']['local']
-            eventEnd = "timezone : {} \n".format(items[i]['end']['timezone']) + items[i]['end']['local']    
-            eventTime = [eventStart,eventEnd]
-            eventTimes.append(eventTime)
-        f = lambda  x: "None" if x == None else x
-        return list(map(f,eventTimes))
+            eventStart = "timezone : {} \n".format(items[i].get('start').get('timezone')) + items[i]['start']['local']
+            eventTimes.append(eventStart)
+        return eventTimes
