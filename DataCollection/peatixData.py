@@ -31,7 +31,7 @@ class peatixData:
     def getData(self,page,searchtxt):
         theUrl = self.getDataUrl(page,searchtxt)
         self.driver.get(theUrl)
-        time.sleep(3)
+        time.sleep(0.6)
         html_soup = BeautifulSoup(self.driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
         return event_containers
