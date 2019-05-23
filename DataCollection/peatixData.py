@@ -9,9 +9,8 @@ class peatixData:
         self._url = "https://peatix.com/search"
         options = webdriver.ChromeOptions()
         options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        options.add_argument('--headless')
-        prefs = {"profile.managed_default_content_settings.images":2}
-        options.add_experimental_option("prefs",prefs)
+        options.add_argument('--disable-gpu')
+        options.add_argument('--no-sandbox')
         self._driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
         
     def getDataUrl(self,page,searchtxt):
