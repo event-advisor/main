@@ -7,6 +7,9 @@ class peatixData:
     def __init__(self):
         self.CHROMEDRIVER_PATH = "/app/.chromedriver/bin/chromedriver"
         self._url = "https://peatix.com/search"
+        options = webdriver.ChromeOptions()
+        options.binary_location = '/app/.apt/usr/bin/google-chrome'
+        self.driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
 
         
         
@@ -26,12 +29,10 @@ class peatixData:
         return theUrl
 
     def getData(self,page,searchtxt):
-        options = webdriver.ChromeOptions()
-        options.binary_location = '/app/.apt/usr/bin/google-chrome'
-        driver = webdriver.Chrome(self.CHROMEDRIVER_PATH,options = options)
         theUrl = self.getDataUrl(page,searchtxt)
-        driver.get(theUrl)
-        html_soup = BeautifulSoup(driver.page_source,'html.parser')
+        self.driver.get(theUrl)
+        time.sleep(3)
+        html_soup = BeautifulSoup(self.driver.page_source,'html.parser')
         event_containers = html_soup.find_all("li",class_="event-thumb ng-scope")
         return event_containers
 
