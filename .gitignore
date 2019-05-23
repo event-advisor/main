@@ -1,6 +1,4 @@
-website/DataCollection/token.txt
-website/DataCollection/__pycache__/eventbriteData.cpython-37.pyc
-website/DataCollection/__pycache__/peatixData.cpython-37.pyc
-website/DataCollection/__pycache__/meetupData.cpython-37.pyc
-website/DataCollection/token-testing.txt
-website/DataCollection/sample-token.txt
+DataCollection/token.txt
+DataCollection/__pycache__/peatixData.cpython-37.pyc
+DataCollection/__pycache__/meetupData.cpython-37.pyc
+DataCollection/__pycache__/eventbriteData.cpython-37.pyc

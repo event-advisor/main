@@ -1,2 +1,0 @@
-"eventbrite token"
-"meet up token"

@@ -1,11 +1,10 @@
 from flask import Flask , flash, redirect, render_template, request, session, abort
-import pandas as pd
 import DataCollection.eventbriteData as eventbriteData
 import DataCollection.meetupData as meetupData
 import DataCollection.peatixData as peatixDataInit
 import time
 
-app = Flask(__name__)
+myapp = Flask(__name__)
 eventData = eventbriteData.EventbriteData()
 meetupData = meetupData.MeetUpData()
 peatixData = peatixDataInit.peatixData()
@@ -17,11 +16,11 @@ searchtxt = ""
 
 
 
-@app.route("/")
+@myapp.route("/")
 def index():
     return render_template("index.html")
 
-@app.route("/meetup/", methods =['GET'])
+@myapp.route("/meetup/", methods =['GET'])
 def meetup():
     global peatixItems
     global eventItems
@@ -98,11 +97,11 @@ def meetup():
     meetupLocations = meetupLocations,
     meetupTimes = meetupTimes)
 
-@app.route("/shutdown")
-def shutdown():
-    peatixData._driver.close()
-    print("shutdown")
-    return render_template("index.html")
+# @app.route("/shutdown")
+# def shutdown():
+#     peatixData._driver.close()
+#     print("shutdown")
+#     return render_template("index.html")
 
 if __name__ == "__main__":
-    app.run()
+    myapp.run()
