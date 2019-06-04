@@ -71,7 +71,7 @@ class EventbriteData:
              # Date & Start Time
             date_time = items[i].get("start")["local"].split("T")
             starttime = datetime.strptime(date_time[1],"%H:%M:%S")
-            eventTimes.append(starttime)
+            eventTimes.append(str(starttime.time()))
         return eventTimes
 
     def getEventDate(self,items):
