@@ -1,10 +1,16 @@
 # file to collect data from eventbrite
 from requests import get
 import os
+from datetime import datetime
 
 class EventbriteData:
     
     def __init__(self):
+        # f = open(r"C:\Users\wen kai\Downloads\y4s2\event-advisor\DataCollection\token.txt","r")
+        # credentials = f.read()
+        # f.close()
+        # txt_arr = credentials.split("\n")
+        # self._token = txt_arr[0]
         self._token = os.environ.get('event-token')
         self._url = "https://www.eventbriteapi.com/v3/events/search"
         self.category_dict = {"Arts": "Performing & Visual Arts", 
@@ -32,6 +38,7 @@ class EventbriteData:
         payload = {"q":searchtxt,
            "location.address":"singapore",
            "page":page,
+           "sort_by": "date",
            "expand":"venue",
            "token":self._token}
         response = get(self._url,params=payload).json()["events"]
@@ -40,7 +47,7 @@ class EventbriteData:
     def getEventName(self,items):
         names = []
         for i in range(len(items)):
-            name = items[i].get("name").get("text")
+            name = "Eventbrite " + items[i].get("name").get("text")
             names.append(name)
         return names
     def getEventUrl(self,items):
@@ -61,6 +68,18 @@ class EventbriteData:
     def getEventTime(self,items):
         eventTimes=[]
         for i in range(len(items)):
-            eventStart = "timezone : {} \n".format(items[i].get('start').get('timezone')) + items[i]['start']['local']
-            eventTimes.append(eventStart)
+             # Date & Start Time
+            date_time = items[i].get("start")["local"].split("T")
+            starttime = datetime.strptime(date_time[1],"%H:%M:%S")
+            eventTimes.append(str(starttime))
         return eventTimes
+
+    def getEventDate(self,items):
+        eventDates=[]
+        for i in range(len(items)):
+             # Date & Start Time
+            date_time = items[i].get("start")["local"].split("T")
+            date = datetime.strptime(date_time[0], "%Y-%m-%d")
+            date = datetime.strftime(date,"%Y-%m-%d")
+            eventDates.append(str(date))
+        return eventDates

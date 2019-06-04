@@ -19,107 +19,42 @@ $(document).ready(function(){
   }
 </style>
   <!-- Page Content -->
-  <div class="row justify-content-center" style="padding: 1%;"><img style="height:200px; width:60%; float:center" src="{{ url_for('static', filename='event.jpg') }}"> </div>
+  <div class="row justify-content-center" style="padding: 1%; position: relative;"><img style="height:200px; width:60%; float:center" src="{{ url_for('static', filename='event.jpg') }}"><div style="font-weight:bolder; font-size:20px; color:white; position:absolute; top:8%; left:57%">Not looking for <span id="searchtxt">{{ searchinput }}</span>? <button class="btn btn-primary" onclick="return back()"><b style="font-size:20px">Back</b></button></div></div>
   <div id="page-content" style="display: none" class="container">
       <div class="row justify-content-center">
-          {%for i in range(peatixNames | length)%}
+          {%for i in range( totalNames | length)%}
           <!-- 0.7 for the 2nd google if else in jinjia2 -->
           {% if i%2 == 0 %}
         <div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
         <div class="card mb-3 h-80 w-75" style="padding:2%;">
-            <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">Peatix {{  peatixNames[i] }}</b></a>
+            <a href = "{{ totalUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">{{  totalNames[i] }}</b></a>
             <div class="card-body flex-fill" style="padding:0%">
-            <p><b style="font-family: Monospace; font-size:10px;">{{ peatixTimes[i][0] }}</b></p>
-            <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  peatixLocations[i] }}.</b></span>
-            <!-- fix below -->
-            <a href = "{{ peatixUrls[i] }}">Read More</a>
+            <p><b style="font-family: Monospace; font-size:10px;">{{ totalDates[i] }} : {{ totalTimes[i] }}</b></p>
+            <span class="card-text"><b style="font-family: Monospace; font-size:12px;">{{  totalLocations[i] }}.</b></span>
+            <div style="text-align:right;"><a href = "{{ totalUrls[i] }}">Read More</a></div>
           </div>
       </div>
       {% else %}
         <!-- /.card -->
         <div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
           <div class="card mb-3 h-80 w-75" style="padding:2%;">
-              <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">Peatix {{  peatixNames[i] }}</b></a>
+              <a href = "{{ totalUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">{{  totalNames[i] }}</b></a>
               <div class="card-body flex-fill" style="padding:0%">
-              <p><b style="font-family: Monospace; font-size:10px;">{{ peatixTimes[i][0] }}</b></p>
-              <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  peatixLocations[i] }}.</b></span>
+              <p><b style="font-family: Monospace; font-size:10px;">{{ totalDates[i] }} : {{ totalTimes[i] }}</b></p>
+              <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  totalLocations[i] }}.</b></span>
               <!-- fix below -->
-              <a href = "{{ peatixUrls[i] }}">Read More</a>
+              <div style="text-align:right;"><a href = "{{ totalUrls[i] }}">Read More</a></div>
             </div>
         </div>
       {% endif %}
-        
+        <br>
       </div>
       <!-- /.col-lg-9 -->
       {%endfor%} 
-
-      <br>
-      {%for i in range(eventNames | length)%}
-      <!-- 0.7 for the 2nd google if else in jinjia2 -->
-      {% if i%2 == 1 %}
-    <div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
-    <div class="card mb-3 h-80 w-75" style="padding:2%;">
-        <a href = "{{ eventUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">event {{  eventNames[i] }}</b></a>
-        <div class="card-body flex-fill" style="padding:0%">
-        <p><b style="font-family: Monospace; font-size:10px;">{{ eventTimes[i][0] }}</b></p>
-        <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  eventLocations[i] }}.</b></span>
-        <!-- fix below -->
-        <a href = "{{ eventUrls[i] }}">Read More</a>
-      </div>
-  </div>
-  {% else %}
-    <!-- /.card -->
-    <div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
-      <div class="card mb-3 h-80 w-75" style="padding:2%;">
-          <a href = "{{ eventUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">eventbrite {{  eventNames[i] }}</b></a>
-          <div class="card-body flex-fill" style="padding:0%">
-          <p><b style="font-family: Monospace; font-size:10px;">{{ eventTimes[i][0] }}</b></p>
-          <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  eventLocations[i] }}.</b></span>
-          <!-- fix below -->
-          <a href = "{{ eventUrls[i] }}">Read More</a>
-        </div>
-    </div>
-  {% endif %}
-  </div>
-  <!-- /.col-lg-9 -->
-  {%endfor%} 
-
-  <br>
-  {%for i in range(meetupNames | length)%}
-  <!-- 0.7 for the 2nd google if else in jinjia2 -->
-  {% if i%2 == 0 %}
-<div class = "col-lg-5 d-flex" style="left:9.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
-<div class="card mb-3 h-80 w-75" style="padding:2%;">
-    <a href = "{{ meetupUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">meetup {{  meetupNames[i] }}</b></a>
-    <div class="card-body flex-fill" style="padding:0%">
-    <p><b style="font-family: Monospace; font-size:10px;">{{ meetupTimes[i][0] }}</b></p>
-    <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  meetupLocations[i] }}.</b></span>
-    <!-- fix below -->
-    <a href = "{{ meetupUrls[i] }}">Read More</a>
-  </div>
-</div>
-{% else %}
-<!-- /.card -->
-<div class = "col-lg-5 d-flex" style="left:0.7%; padding-right: 0; padding-left:0; padding-bottom: 0;">
-  <div class="card mb-3 h-80 w-75" style="padding:2%;">
-      <a href = "{{ peatixUrls[i] }}"><b style="font-family: Monospace; font-size:16px;">meetup {{  meetupNames[i] }}</b></a>
-      <div class="card-body flex-fill" style="padding:0%">
-      <p><b style="font-family: Monospace; font-size:10px;">{{ meetupTimes[i][0] }}</b></p>
-      <span class="card-text"><b style="font-family: Monospace; font-size:10px;">{{  meetupLocations[i] }}.</b></span>
-      <!-- fix below -->
-      <a href = "{{ meetupUrls[i] }}">Read More</a>
-    </div>
-</div>
-{% endif %}
-
-</div>
-<!-- /.col-lg-9 -->
-{%endfor%} 
     </div>
 
   </div>
   <!-- /.container -->
-
   <div class="row justify-content-center">
   <nav aria-label="Page navigation example" >
     <ul class="pagination">
@@ -137,6 +72,9 @@ $(document).ready(function(){
   </nav>
 </div>
   <script>
+  function back(){
+    window.location.href="/";
+  }
   var theSearchTxt = document.getElementById("searchtxt").innerHTML;
   for (var i =1 ; i < 10 ; i++){
     document.getElementById(i.toString()).href = "/meetup/?search="+theSearchTxt+"&p="+i.toString();
