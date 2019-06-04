@@ -41,7 +41,7 @@ class MeetUpData:
     def getEventName(self,items):
         names =[]
         for i in range(len(items)):
-            name = "Meetup " + items[i].get("name")
+            name = "[Meetup] " + items[i].get("name")
             names.append(name)
         return names
     def getEventUrl(self,items):

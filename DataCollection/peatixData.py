@@ -46,7 +46,7 @@ class peatixData:
         names =[]
         for i in range(len(items)):
             event_details = items[i].find("div",class_="event-thumb_detail")
-            name =  "Peatix " +event_details.h3.text
+            name =  "[Peatix] " +event_details.h3.text
             names.append(name)
         return names
     def getEventUrl(self,items):

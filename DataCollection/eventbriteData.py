@@ -47,7 +47,7 @@ class EventbriteData:
     def getEventName(self,items):
         names = []
         for i in range(len(items)):
-            name = "Eventbrite " + items[i].get("name").get("text")
+            name = "[Eventbrite] " + items[i].get("name").get("text")
             names.append(name)
         return names
     def getEventUrl(self,items):
